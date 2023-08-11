@@ -1,0 +1,72 @@
+
+<%= form_with(model: post, local: false) do |form| %>
+<div class="modal-body">
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :Heading,id: :posthead %>
+    <%= form.text_field :Heading %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Description,id: :postdesc %>
+    <%= form.text_field :Description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Contact,id: :postcont%>
+    <%= form.text_field :Contact %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Email,id: :postem%>
+    <%= form.text_field :Email %>
+  </div>
+   <div class="field">
+    <%= form.number_field :user_id ,id: :post_user_id,value: current_user.id , type: :hidden %>
+  </div> 
+  </div>
+    <button type="submit" id="editPost" class="btn btn-primary">Update</button>
+  </div>
+</div> 
+</div>
+<% end %>
+<script>
+$(function(){
+$("#editPost").click(function(){
+  console.log('ajaxxxxxxxxx')
+  var posth= $("#posthead").val();
+  var postd= $("#postdesc").val();
+  var postc= $("#postcont").val();
+  var poste= $("#postem").val();
+  var postuser=$("#post_user_id").val();
+  console.log(posth)
+ 
+   $.ajax({
+    url : '/posts/'+ this.current_user.id,
+    type : 'PATCH',
+    // data : {postheading:postheading,postdes:postdes,postemail:postemail,postuser:postuser, userid:current_user.id},
+    data : {posth:posth,postd:postd,postc:postc,poste:poste,postuser:postuser},
+    success : function(response) {              
+        alert(response.msg);
+    },
+    error : function(request,error)
+    {
+        alert("Request: "+JSON.stringify(request));
+    }
+})
+})});
+
+
+</script>
+

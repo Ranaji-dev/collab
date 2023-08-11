@@ -1,0 +1,50 @@
+
+
+<p>
+  <strong>Heading:</strong>
+  <%= @post.Heading %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @post.Description %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @post.Contact %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @post.Email %>
+</p>
+
+<!--<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+-->
+<% if user_signed_in? %>
+ <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#editModal">
+    Edit Post
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit this Post</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+         <%= render 'form1', post: @post %>
+        </div>
+      </div>
+    </div>
+  <%else%>
+  <h1>Please signIn to edit post</h1>
+  <%= link_to "Sign-in", new_user_session_path,class: "btn btn-primary btn-lg" %>
+  <h2>or register yourself to create new post</h2>
+  <%= link_to "Sign-up", new_user_registration_path,class: "btn btn-primary" %>
+  <%= link_to 'Back', posts_path, class: 'btn btn-primary btn-lg' %>
+  <%end%>

@@ -1,0 +1,77 @@
+
+<div class="modal-body">
+  <div class="mb-3">
+    <label for="formGroupExampleInput">Heading</label>
+    <input type="text" class="form-control" id="postheading" >
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput2">Description</label>
+    <input type="text" class="form-control" id="postdes" >
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Contact</label>
+    <input type="text" class="form-control" id="postcontact">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="postemail" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  
+
+  <button type="submit" id="addPost" class="btn btn-primary">Submit</button>
+</div>
+
+<script>
+$(function(){
+$("#addPost").click(function(){
+
+  console.log('ajaxxxxxxxxx')
+  var posth= $("#postheading").val();
+  var postd= $("#postdes").val();
+  var postc= $("#postcontact").val();
+  var poste= $("#postemail").val();
+  console.log(posth)
+  // var postuser= $("#postuser").val();
+  //console.log(postHeading)
+   $.ajax({
+    url : '/posts',
+    type : 'POST',
+    // data : {postheading:postheading,postdes:postdes,postemail:postemail,postuser:postuser, userid:current_user.id},
+    data : {posth:posth,postd:postd,postc:postc,poste:poste},
+    success : function(response) {              
+      alert(response.msg);// if true (1)
+        setTimeout(function(){// wait for 5 secs(2)
+             location.reload(); // then reload the page.(3)
+        }, 1200); 
+     },
+
+    error : function(request,error)
+    {
+        alert("Request: "+JSON.stringify(request));
+    }
+})
+})});
+
+
+</script>
+
+
+
+
+<!--$.ajax({
+
+    url : 'http://voicebunny.comeze.com/index.php',
+    type : 'GET',
+    data : {
+        'numberOfWords' : 10
+    },
+    dataType:'json',
+    success : function(data) {              
+        alert('Data: '+data);
+    },
+    error : function(request,error)
+    {
+        alert("Request: "+JSON.stringify(request));
+    }
+});-->

@@ -1,0 +1,62 @@
+<%= form_with(model: post, local: false) do |form| %>
+<div class="model-body">
+ <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <!--<div class="modal-body">
+  <div class="mb-3">
+    <label for="formGroupExampleInput">Heading</label>
+    <input type="text" class="form-control" id="postheading" >
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput2">Description</label>
+    <input type="text" class="form-control" id="postdes" >
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Contact</label>
+    <input type="text" class="form-control" id="postcontact">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="postemail" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <button type="submit" id="addPost" class="btn btn-primary">Update</button>
+</div>-->
+ <div class="field">
+    <%= form.label :Heading %>
+    <%= form.text_field :Heading %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Description %>
+    <%= form.text_field :Description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Contact %>
+    <%= form.text_field :Contact %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Email %>
+    <%= form.text_field :Email %>
+  </div>
+   <!--<div class="field">
+    <%= form.number_field :user_id ,id: :post_user_id,value: current_user.id , type: :hidden %>
+  </div>-->
+</div> 
+</div>
+  <button type="submit" id="editPost" class="btn btn-primary">Update</button>
+</div>
+</div>
+</div>
+
